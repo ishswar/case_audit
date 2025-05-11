@@ -1,4 +1,5 @@
 from google import genai
+from google.genai import types
 import json
 import re
 from ..models.audit import AuditReport, AuditRatings, CaseInfo
@@ -8,17 +9,17 @@ class AIAnalyzer:
         self.project_id = project_id
         self.location = location
         try:
-            # Configure with Vertex AI
-            genai.configure(
-                api_key=None,  # Will use ADC
-                project_id=project_id,
-                location=location,
+            # Initialize the Vertex AI client, which will use application default credentials
+            self.client = genai.Client(
                 vertexai=True,
+                project=project_id,
+                location=location,
             )
-            self.model = genai.GenerativeModel('gemini-2.0-flash-001')
+            self.model_name = "gemini-2.0-flash-001"
+            print("Google AI API initialized successfully")
         except Exception as e:
             print(f"Error configuring Google AI API: {e}")
-            self.model = None
+            self.client = None
 
     def _clean_json_response(self, text: str) -> dict:
         """Clean and extract the JSON response directly as a dictionary."""
@@ -102,16 +103,44 @@ class AIAnalyzer:
         {case_content[:3000]}
         """
 
-        # Check if model is available
-        if self.model is None:
-            raise RuntimeError("Google AI model not available. Authentication may have failed.")
+        # Check if client is available
+        if self.client is None:
+            raise RuntimeError("Google AI client not available. Authentication may have failed.")
             
-        # Call the Gemini API
+        # Call the Gemini API using the same approach as in case_auditor.py
         print("Processing AI response...")
-        response = self.model.generate_content(prompt)
         
+        contents = [
+            types.Content(
+                role="user",
+                parts=[types.Part(text=prompt)]
+            )
+        ]
+        
+        generate_content_config = types.GenerateContentConfig(
+            temperature=0.7,
+            top_p=1,
+            seed=0,
+            max_output_tokens=2048,
+            response_modalities=["TEXT"],
+            safety_settings=[
+                types.SafetySetting(category="HARM_CATEGORY_HATE_SPEECH", threshold="OFF"),
+                types.SafetySetting(category="HARM_CATEGORY_DANGEROUS_CONTENT", threshold="OFF"),
+                types.SafetySetting(category="HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold="OFF"),
+                types.SafetySetting(category="HARM_CATEGORY_HARASSMENT", threshold="OFF")
+            ],
+        )
+        
+        # Use the API exactly as in case_auditor.py
+        response_text = ""
+        for chunk in self.client.models.generate_content_stream(
+            model=self.model_name,
+            contents=contents,
+            config=generate_content_config,
+        ):
+            response_text += chunk.text
+            
         # Parse the response
-        response_text = response.text
         result = self._clean_json_response(response_text)
         
         # Create and return AuditReport
