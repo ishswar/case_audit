@@ -95,6 +95,8 @@ class AIAnalyzer:
           "recommendations": "1. Improve the initial response by personalizing it more. 2. Provide clearer steps for diagnosis. 3. Follow up more proactively. 4. Include links to relevant documentation. 5. Escalate complex issues more quickly."
         }}
 
+        Ensure "recommendations" is a single string, not a list.
+
         Case details:
         Product: {case_info.product_name} {case_info.product_version}
         Subject: {case_info.subject}
@@ -143,6 +145,12 @@ class AIAnalyzer:
         # Parse the response
         result = self._clean_json_response(response_text)
         
+        # Handle recommendations if it's a list
+        recommendations = result.get("recommendations", "")
+        if isinstance(recommendations, list):
+            # Convert list to string
+            recommendations = ". ".join(recommendations)
+        
         # Create and return AuditReport
         return AuditReport(
             case_info=case_info,
@@ -160,5 +168,5 @@ class AIAnalyzer:
             solution_feedback=result.get("solution_feedback", ""),
             communication_feedback=result.get("communication_feedback", ""),
             overall_feedback=result.get("overall_feedback", ""),
-            recommendations=result.get("recommendations", "")
+            recommendations=recommendations
         ) 
