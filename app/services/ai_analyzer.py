@@ -102,59 +102,34 @@ class AIAnalyzer:
         {case_content[:3000]}
         """
 
-        try:
-            print("Processing AI response...")
+        # Check if model is available
+        if self.model is None:
+            raise RuntimeError("Google AI model not available. Authentication may have failed.")
             
-            # Check if model is available
-            if self.model is None:
-                raise ValueError("Google AI model not available")
-                
-            # Actually call the Gemini API now using correct method
-            response = self.model.generate_content(prompt)
-            
-            # Parse the response
-            response_text = response.text
-            result = self._clean_json_response(response_text)
-            
-            # Create and return AuditReport
-            return AuditReport(
-                case_info=case_info,
-                ratings=AuditRatings(
-                    initial_response=result.get("ratings", {}).get("initial_response", 3),
-                    problem_diagnosis=result.get("ratings", {}).get("problem_diagnosis", 3),
-                    technical_accuracy=result.get("ratings", {}).get("technical_accuracy", 3),
-                    solution_quality=result.get("ratings", {}).get("solution_quality", 3),
-                    communication=result.get("ratings", {}).get("communication", 3),
-                    overall_experience=result.get("ratings", {}).get("overall_experience", 3)
-                ),
-                initial_response_feedback=result.get("initial_response_feedback", ""),
-                problem_diagnosis_feedback=result.get("problem_diagnosis_feedback", ""),
-                technical_accuracy_feedback=result.get("technical_accuracy_feedback", ""),
-                solution_feedback=result.get("solution_feedback", ""),
-                communication_feedback=result.get("communication_feedback", ""),
-                overall_feedback=result.get("overall_feedback", ""),
-                recommendations=result.get("recommendations", "")
-            )
-        except Exception as e:
-            print(f"Error calling Google AI API: {str(e)}")
-            print("Using fallback mock data due to API error")
-            
-            # Using fallback mock data when API fails
-            return AuditReport(
-                case_info=case_info,
-                ratings=AuditRatings(
-                    initial_response=3,
-                    problem_diagnosis=4,
-                    technical_accuracy=4,
-                    solution_quality=3,
-                    communication=3,
-                    overall_experience=3
-                ),
-                initial_response_feedback="The initial response from Hardik was prompt and asked relevant questions to understand the issue. However, the canned response asking for information could have been more personalized. The follow-up questions were good.",
-                problem_diagnosis_feedback="Hardik correctly identified that the shared modules were not being included in the EAR file. This was a key step in diagnosing the problem. The comparison of the two EAR files was a good approach.",
-                technical_accuracy_feedback="The technical analysis and suggestions were generally accurate. The suggestion to manually create the EAR file and compare the processes was helpful. Identifying the missing shared modules was accurate.",
-                solution_feedback="The solution was ultimately found by the customer ('remavenizing' the application and shared modules). While the support team didn't directly provide the solution, they guided the customer in the right direction by focusing on the EAR creation process and missing dependencies.",
-                communication_feedback="Communication was generally clear but could have been more proactive. There were multiple instances where the case was put into 'Pending Customer Response' without a clear indication of what was specifically needed next.",
-                overall_feedback="The support team effectively identified the root cause of the issue (missing shared modules in the EAR). While the customer ultimately resolved the issue themselves, the support team provided valuable guidance. However, the communication could be improved by being more proactive and providing more specific instructions.",
-                recommendations="1. Improve proactive debugging of build processes (Maven). 2. Be more specific when putting cases into 'Pending Customer Response'. 3. Reduce resolution time by escalating issues if initial troubleshooting steps are not effective. 4. Ensure all communications are personalized and avoid relying solely on canned responses. 5. When closing a case, summarize the root cause and the steps taken to resolve it."
-            ) 
+        # Call the Gemini API
+        print("Processing AI response...")
+        response = self.model.generate_content(prompt)
+        
+        # Parse the response
+        response_text = response.text
+        result = self._clean_json_response(response_text)
+        
+        # Create and return AuditReport
+        return AuditReport(
+            case_info=case_info,
+            ratings=AuditRatings(
+                initial_response=result.get("ratings", {}).get("initial_response", 3),
+                problem_diagnosis=result.get("ratings", {}).get("problem_diagnosis", 3),
+                technical_accuracy=result.get("ratings", {}).get("technical_accuracy", 3),
+                solution_quality=result.get("ratings", {}).get("solution_quality", 3),
+                communication=result.get("ratings", {}).get("communication", 3),
+                overall_experience=result.get("ratings", {}).get("overall_experience", 3)
+            ),
+            initial_response_feedback=result.get("initial_response_feedback", ""),
+            problem_diagnosis_feedback=result.get("problem_diagnosis_feedback", ""),
+            technical_accuracy_feedback=result.get("technical_accuracy_feedback", ""),
+            solution_feedback=result.get("solution_feedback", ""),
+            communication_feedback=result.get("communication_feedback", ""),
+            overall_feedback=result.get("overall_feedback", ""),
+            recommendations=result.get("recommendations", "")
+        ) 

@@ -26,46 +26,54 @@ def process_pdf(pdf_path, output_dir, project_id, location):
         # Analyze the case with AI
         print("Analyzing case with AI...")
         analyzer = AIAnalyzer(project_id=project_id, location=location)
-        audit_report = analyzer.analyze_case(case_content, case_info)
         
-        # Generate the Markdown report
-        print("Generating Markdown report...")
-        report_generator = ReportGenerator(output_md)
-        report_generator.generate_report(audit_report)
+        try:
+            audit_report = analyzer.analyze_case(case_content, case_info)
+            
+            # Generate the Markdown report
+            print("Generating Markdown report...")
+            report_generator = ReportGenerator(output_md)
+            report_generator.generate_report(audit_report)
+            
+            print(f"Audit report generated successfully: {output_md}\n")
+            
+            # Display a summary in the terminal
+            print("=== Case Quality Audit Report ===\n")
+            print(f"Case Number: {audit_report.case_info.case_number}")
+            print(f"Customer: {audit_report.case_info.customer_name}")
+            print(f"Product: {audit_report.case_info.product_name} {audit_report.case_info.product_version}\n")
+            
+            print("Ratings:")
+            print(f"Initial Response: {audit_report.ratings.initial_response}/5")
+            print(f"Problem Diagnosis: {audit_report.ratings.problem_diagnosis}/5")
+            print(f"Technical Accuracy: {audit_report.ratings.technical_accuracy}/5")
+            print(f"Solution Quality: {audit_report.ratings.solution_quality}/5")
+            print(f"Communication: {audit_report.ratings.communication}/5")
+            print(f"Overall Experience: {audit_report.ratings.overall_experience}/5\n")
+            
+            print("Recommendations:")
+            # Format recommendations as individual lines
+            recommendations = audit_report.recommendations.split(".")
+            for rec in recommendations:
+                rec = rec.strip()
+                if rec and not rec.isdigit():
+                    # Clean up numbered format if present
+                    if rec[0].isdigit() and len(rec) > 1 and rec[1] in ['.', ' ', ')']:
+                        rec = rec[2:].strip() if rec[1] in ['.', ')'] else rec[1:].strip()
+                    print(f"- {rec}")
+            
+            # Inform user about viewing the Markdown report
+            print(f"\nFor a detailed report with all feedback, see {output_md}")
+            print("You can view this Markdown file in any Markdown viewer or editor.")
+            print("="*60 + "\n")
+            
+            return True
+        except Exception as e:
+            print(f"ERROR: AI analysis failed: {str(e)}")
+            print("No audit report will be generated for this case.")
+            print("="*60 + "\n")
+            return False
         
-        print(f"Audit report generated successfully: {output_md}\n")
-        
-        # Display a summary in the terminal
-        print("=== Case Quality Audit Report ===\n")
-        print(f"Case Number: {audit_report.case_info.case_number}")
-        print(f"Customer: {audit_report.case_info.customer_name}")
-        print(f"Product: {audit_report.case_info.product_name} {audit_report.case_info.product_version}\n")
-        
-        print("Ratings:")
-        print(f"Initial Response: {audit_report.ratings.initial_response}/5")
-        print(f"Problem Diagnosis: {audit_report.ratings.problem_diagnosis}/5")
-        print(f"Technical Accuracy: {audit_report.ratings.technical_accuracy}/5")
-        print(f"Solution Quality: {audit_report.ratings.solution_quality}/5")
-        print(f"Communication: {audit_report.ratings.communication}/5")
-        print(f"Overall Experience: {audit_report.ratings.overall_experience}/5\n")
-        
-        print("Recommendations:")
-        # Format recommendations as individual lines
-        recommendations = audit_report.recommendations.split(".")
-        for rec in recommendations:
-            rec = rec.strip()
-            if rec and not rec.isdigit():
-                # Clean up numbered format if present
-                if rec[0].isdigit() and len(rec) > 1 and rec[1] in ['.', ' ', ')']:
-                    rec = rec[2:].strip() if rec[1] in ['.', ')'] else rec[1:].strip()
-                print(f"- {rec}")
-        
-        # Inform user about viewing the Markdown report
-        print(f"\nFor a detailed report with all feedback, see {output_md}")
-        print("You can view this Markdown file in any Markdown viewer or editor.")
-        print("="*60 + "\n")
-        
-        return True
     except Exception as e:
         print(f"Error processing case from PDF {os.path.basename(pdf_path)}: {e}")
         return False
@@ -126,6 +134,10 @@ def main():
     print(f"Processing complete! Processed {len(pdf_files)} file(s)")
     print(f"Successful: {successful}")
     print(f"Failed: {failed}")
+    
+    # Exit with error code if any processing failed
+    if failed > 0:
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
