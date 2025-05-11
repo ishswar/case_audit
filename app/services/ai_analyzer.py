@@ -102,7 +102,7 @@ class AIAnalyzer:
         Subject: {case_info.subject}
         
         Case contents:
-        {case_content[:3000]}
+        {case_content}
         """
 
         # Check if client is available
