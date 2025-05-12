@@ -1,47 +1,101 @@
 # TIBCO Case Quality Audit Tool
 
-A tool for analyzing TIBCO support case PDFs and generating quality audit reports in Markdown format.
+A tool for analyzing TIBCO support case PDFs and generating quality audit reports in Markdown format using Google's Gemini AI.
 
 ## Overview
 
 This tool helps quality assurance teams evaluate support cases by:
 1. Extracting information from TIBCO support case PDFs
-2. Analyzing the case content using AI (Google Gemini)
+2. Analyzing the case content using Google's Gemini AI
 3. Generating detailed quality audit reports in Markdown format
+4. Providing a web-based interface for uploading PDFs and viewing reports
 
 ## Features
 
+- Client-server architecture with FastAPI backend and Streamlit frontend
 - Automatic PDF extraction of case details
 - AI-powered analysis of support quality across multiple dimensions
-- Customizable evaluation criteria
 - Clean, organized Markdown reports
-- One report per case ID (overwrites previous audits of the same case)
+- Duplicate handling to prevent processing the same case multiple times
+- Application state management and reset functionality
+- Multi-page navigation in the frontend
 
 ## Project Structure
 
 ```
 case_audit/
-├── app/
-│   ├── models/         # Pydantic data models
-│   ├── services/       # Core functionality
-│   └── main.py         # Application entry point
-└── audit_reports/      # Generated audit reports
+├── application_server/     # Client-server implementation
+│   ├── backend/            # FastAPI server
+│   │   ├── jobs/           # Job tracking storage
+│   │   ├── main.py         # API endpoints
+│   │   ├── reset_app.py    # Reset utility
+│   │   └── clean_duplicate_jobs.py  # Cleanup utility
+│   └── frontend/           # Streamlit interface
+│       ├── pages/          # Multi-page components
+│       └── main.py         # Frontend entry point
+├── app/                    # Core application services
+│   ├── models/             # Pydantic data models
+│   ├── services/           # Core functionality modules
+│   │   ├── pdf_extractor.py   # PDF parsing
+│   │   ├── ai_analyzer.py     # Google Gemini integration
+│   │   └── report_generator.py # Markdown report creation
+│   └── main.py             # Original CLI application
+├── pdf_uploads/            # Storage for uploaded PDFs
+├── audit_reports/          # Generated audit reports
+└── requirements.txt        # Project dependencies
 ```
 
-## How to Use
+## Getting Started
 
-1. Place your TIBCO case PDF in the `app/` directory
-2. Run the tool:
-   ```
-   python -m app.main
-   ```
-3. View the generated report in the `audit_reports/` directory
+### Installation
 
-## Requirements
+```bash
+# Clone the repository
+git clone <repository-url>
+cd case_audit
 
-- Python 3.8+
-- PyPDF2
-- Google Generative AI (Gemini)
+# Install dependencies
+pip install -r requirements.txt
+
+# Set up environment variables for Google Gemini API
+export PROJECT_ID=your-google-project-id
+export LOCATION=global
+```
+
+### Running the Application
+
+#### Client-Server Mode (Recommended)
+
+```bash
+# Start the backend server
+cd application_server/backend
+uvicorn main:app --reload --port 8000
+
+# In a separate terminal, start the frontend
+cd application_server/frontend
+streamlit run main.py
+```
+
+Then open your browser to http://localhost:8501 to access the web interface.
+
+#### CLI Mode (Legacy)
+
+```bash
+# Run the CLI tool directly
+python -m app.main /path/to/tibco_case.pdf
+```
+
+## Using the Web Interface
+
+1. Navigate to the "Upload Cases" page
+2. Upload a TIBCO case PDF file
+3. Monitor processing status
+4. Switch to the "View Reports" page to see audit results
+
+## Administration
+
+- Reset application state: `curl -X POST "http://localhost:8000/admin/reset?clear_jobs=true"`
+- Clean up duplicate entries: Run `python application_server/backend/clean_duplicate_jobs.py`
 
 ## Sample Output
 
@@ -53,11 +107,20 @@ The tool generates comprehensive Markdown reports that include:
 
 ## Development
 
-This project was created to streamline the case quality audit process. Future enhancements may include:
-- Support for batch processing of multiple PDFs
-- Additional evaluation metrics
+### Recent Updates
+
+- Implemented client-server architecture with FastAPI and Streamlit
+- Added multi-page navigation in the frontend
+- Fixed duplicate case handling to prevent redundant processing
+- Added application reset and cleanup utilities
+- Improved error handling and logging
+
+### Future Enhancements
+
 - Dashboard for tracking quality trends
-- Export to different formats (PDF, HTML, etc.)
+- Export to different formats (PDF, HTML)
+- User authentication and role-based access
+- Integration with ticketing systems
 
 ## License
 
