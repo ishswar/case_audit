@@ -76,6 +76,13 @@ class AIAnalyzer:
         4. Escalate to engineering sooner when initial efforts aren't working
         5. Provide documentation links with each response
 
+        Additionally, create a brief "Case Summary" (3-5 lines) that includes:
+        - What was the main technical issue
+        - How it was resolved
+        - Any key timestamps or milestones
+        - Names of people involved
+        - Any noteworthy technical details
+
         Format your analysis as valid JSON like this:
         {{
           "ratings": {{
@@ -92,10 +99,12 @@ class AIAnalyzer:
           "solution_feedback": "The solution was effective but took longer than necessary to...",
           "communication_feedback": "Communication was regular but could be enhanced by...",
           "overall_feedback": "Overall, this was a decent support case, but improvements could be made in...",
-          "recommendations": "1. Improve the initial response by personalizing it more. 2. Provide clearer steps for diagnosis. 3. Follow up more proactively. 4. Include links to relevant documentation. 5. Escalate complex issues more quickly."
+          "recommendations": "1. Improve the initial response by personalizing it more. 2. Provide clearer steps for diagnosis. 3. Follow up more proactively. 4. Include links to relevant documentation. 5. Escalate complex issues more quickly.",
+          "case_summary": "Customer John Doe reported TIBCO BusinessWorks container startup failures on May 3rd. Engineer Bob Smith identified a configuration issue with JVM memory settings. Resolved on May 5th by updating the Docker configuration with proper memory allocation."
         }}
 
         Ensure "recommendations" is a single string, not a list.
+        Ensure "case_summary" is concise but includes all key elements.
 
         Case details:
         Product: {case_info.product_name} {case_info.product_version}
@@ -145,14 +154,45 @@ class AIAnalyzer:
         # Parse the response
         result = self._clean_json_response(response_text)
         
+        # Debug: Print the raw result to check for case_summary
+        print("\nDEBUG - AI Response Keys:", result.keys())
+        if "case_summary" in result:
+            print("DEBUG - Case Summary found:", result["case_summary"])
+        else:
+            print("DEBUG - No case_summary in AI response!")
+            
         # Handle recommendations if it's a list
         recommendations = result.get("recommendations", "")
         if isinstance(recommendations, list):
             # Convert list to string
             recommendations = ". ".join(recommendations)
         
-        # Create and return AuditReport
-        return AuditReport(
+        # Generate a case summary if one wasn't provided by the AI
+        case_summary = result.get("case_summary", "")
+        if not case_summary:
+            # Create a basic summary from available information
+            print("DEBUG - Generating a fallback case summary")
+            summary_parts = []
+            summary_parts.append(f"Case involved {case_info.customer_name} reporting an issue with {case_info.product_name} {case_info.product_version}.")
+            summary_parts.append(f"The issue was related to '{case_info.subject}'.")
+            summary_parts.append(f"Case was opened on {case_info.date_created.strftime('%Y-%m-%d')} and closed on {case_info.date_closed.strftime('%Y-%m-%d')}.")
+            
+            # Add some assessment from the AI evaluation
+            if result.get("overall_feedback"):
+                first_sentence = result.get("overall_feedback").split(".")[0]
+                if first_sentence:
+                    summary_parts.append(first_sentence + ".")
+                    
+            # Get top recommendation if available
+            if recommendations:
+                top_rec = re.sub(r'^\d+[\.\)\s]+', '', recommendations.split(".")[0])
+                if top_rec:
+                    summary_parts.append(f"Top recommendation: {top_rec}.")
+                    
+            case_summary = " ".join(summary_parts)
+            
+        # Debug: Print final report fields
+        report = AuditReport(
             case_info=case_info,
             ratings=AuditRatings(
                 initial_response=result.get("ratings", {}).get("initial_response", 3),
@@ -168,5 +208,11 @@ class AIAnalyzer:
             solution_feedback=result.get("solution_feedback", ""),
             communication_feedback=result.get("communication_feedback", ""),
             overall_feedback=result.get("overall_feedback", ""),
-            recommendations=recommendations
-        ) 
+            recommendations=recommendations,
+            case_summary=case_summary
+        )
+        
+        print("DEBUG - Final report has case_summary:", bool(report.case_summary))
+        print("DEBUG - Case summary value:", report.case_summary)
+        
+        return report 

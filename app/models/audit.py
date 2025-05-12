@@ -31,4 +31,5 @@ class AuditReport(BaseModel):
     solution_feedback: str
     communication_feedback: str
     overall_feedback: str
-    recommendations: str 
+    recommendations: str
+    case_summary: Optional[str] = ""  # A quick highlight of the case - what was the issue and how it was solved 

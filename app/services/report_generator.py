@@ -31,6 +31,11 @@ class ReportGenerator:
     def generate_report(self, report: AuditReport):
         """Generate a Markdown report."""
         
+        # Debug: Print case summary at the start
+        print(f"\nDEBUG - Report Generator received case_summary: '{report.case_summary}'")
+        print(f"DEBUG - case_summary type: {type(report.case_summary)}")
+        print(f"DEBUG - case_summary is empty: {not bool(report.case_summary)}")
+        
         # Create markdown content
         markdown = []
         
@@ -47,6 +52,16 @@ class ReportGenerator:
         markdown.append(f"**Created:** {report.case_info.date_created.strftime('%Y-%m-%d %H:%M:%S')}  ")
         markdown.append(f"**Closed:** {report.case_info.date_closed.strftime('%Y-%m-%d %H:%M:%S')}  ")
         markdown.append(f"**Subject:** {self._wrap_text(report.case_info.subject, 80)}\n")
+        
+        # Add Case Summary after Case Information if available
+        if report.case_summary:
+            print(f"DEBUG - Adding case summary to report: '{report.case_summary}'")
+            markdown.append("\n## Case Summary\n")
+            markdown.append("*Quick highlights of the case:*\n")
+            markdown.append(self._wrap_text(report.case_summary))
+            markdown.append("")
+        else:
+            print("DEBUG - No case summary to add to report!")
         
         # Ratings
         markdown.append("\n## Quality Ratings\n")
@@ -105,6 +120,10 @@ class ReportGenerator:
         # Format as numbered list items
         for i, rec in enumerate(recommendations, 1):
             markdown.append(f"{i}. {rec}")
+        
+        # Add timestamp at the end of the report
+        generation_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        markdown.append(f"\n\n*Report generated on: {generation_time}*")
         
         # Write to file
         os.makedirs(os.path.dirname(self.output_path), exist_ok=True)
