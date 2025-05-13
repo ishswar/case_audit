@@ -19,6 +19,7 @@ This tool helps quality assurance teams evaluate support cases by:
 - Duplicate handling to prevent processing the same case multiple times
 - Application state management and reset functionality
 - Multi-page navigation in the frontend
+- Docker support for containerized deployment
 
 ## Project Structure
 
@@ -42,6 +43,9 @@ case_audit/
 │   └── main.py             # Original CLI application
 ├── pdf_uploads/            # Storage for uploaded PDFs
 ├── audit_reports/          # Generated audit reports
+├── Dockerfile              # Docker container definition
+├── docker-compose.yml      # Docker Compose configuration
+├── docker-entrypoint.sh    # Container entry point script
 └── requirements.txt        # Project dependencies
 ```
 
@@ -64,7 +68,25 @@ export LOCATION=global
 
 ### Running the Application
 
-#### Client-Server Mode (Recommended)
+#### Docker (Recommended)
+
+The easiest way to run the application is using Docker Compose:
+
+```bash
+# Set your Google Gemini API credentials
+export PROJECT_ID=your-google-project-id
+export LOCATION=global
+
+# Start the application with Docker Compose
+docker-compose up -d
+
+# Alternative: Run as a single container
+docker-compose --profile combined up combined -d
+```
+
+Access the frontend at http://localhost:8501
+
+#### Client-Server Mode (Local Development)
 
 ```bash
 # Start the backend server
@@ -97,6 +119,13 @@ python -m app.main /path/to/tibco_case.pdf
 - Reset application state: `curl -X POST "http://localhost:8000/admin/reset?clear_jobs=true"`
 - Clean up duplicate entries: Run `python application_server/backend/clean_duplicate_jobs.py`
 
+### Docker Administration
+
+- View logs: `docker-compose logs -f`
+- Restart services: `docker-compose restart`
+- Stop the application: `docker-compose down`
+- Rebuild containers: `docker-compose build`
+
 ## Sample Output
 
 The tool generates comprehensive Markdown reports that include:
@@ -109,6 +138,7 @@ The tool generates comprehensive Markdown reports that include:
 
 ### Recent Updates
 
+- Added Docker support for containerized deployment
 - Implemented client-server architecture with FastAPI and Streamlit
 - Added multi-page navigation in the frontend
 - Fixed duplicate case handling to prevent redundant processing

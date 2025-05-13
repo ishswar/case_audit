@@ -1,0 +1,37 @@
+# Git
+.git
+.gitignore
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Virtual environment
+venv/
+env/
+.env/
+.venv/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Project specific
+pdf_uploads/*
+!pdf_uploads/.gitkeep
+audit_reports/*
+!audit_reports/.gitkeep
+application_server/backend/jobs/*
+!application_server/backend/jobs/.gitkeep 

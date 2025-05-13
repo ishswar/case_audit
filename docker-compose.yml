@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tibco-case-audit-backend
+    container_name: tibco-case-audit-backend
+    command: backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./pdf_uploads:/app/pdf_uploads
+      - ./audit_reports:/app/audit_reports
+      - ./application_server/backend/jobs:/app/application_server/backend/jobs
+    environment:
+      - PROJECT_ID=${PROJECT_ID:-webfocus-devops}
+      - LOCATION=${LOCATION:-global}
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tibco-case-audit-frontend
+    container_name: tibco-case-audit-frontend
+    command: frontend
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./pdf_uploads:/app/pdf_uploads
+      - ./audit_reports:/app/audit_reports
+    environment:
+      - API_URL=http://backend:8000
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+# Alternative single container setup
+  combined:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tibco-case-audit-combined
+    container_name: tibco-case-audit-combined
+    command: all
+    ports:
+      - "8000:8000"
+      - "8501:8501"
+    volumes:
+      - ./pdf_uploads:/app/pdf_uploads
+      - ./audit_reports:/app/audit_reports
+      - ./application_server/backend/jobs:/app/application_server/backend/jobs
+    environment:
+      - PROJECT_ID=${PROJECT_ID:-webfocus-devops}
+      - LOCATION=${LOCATION:-global}
+    restart: unless-stopped
+    profiles:
+      - combined
+
+volumes:
+  pdf_uploads:
+  audit_reports:
+  jobs:
+
+networks:
+  default:
+    name: tibco-case-audit-network 
