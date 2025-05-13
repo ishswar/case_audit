@@ -1,0 +1,356 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "categoryId": 64,
+            "categoryName": "Default",
+            "subCategoryId": 64,
+            "subCategoryName": "Default",
+            "appSubCatId": 64,
+            "appSubCatName": "Default",
+            "subcategoryName": "Default"
+        },
+        {
+            "categoryId": 1,
+            "categoryName": "Not Applicable",
+            "subCategoryId": 1,
+            "subCategoryName": "Not Applicable",
+            "appSubCatId": 1,
+            "appSubCatName": "Not Applicable",
+            "subcategoryName": "Not Applicable"
+        },
+        {
+            "categoryId": 2,
+            "categoryName": "Other Products",
+            "subCategoryId": 2,
+            "subCategoryName": "Other Products",
+            "appSubCatId": 2,
+            "appSubCatName": "Other Products",
+            "subcategoryName": "Other Products"
+        },
+        {
+            "categoryId": 32,
+            "categoryName": "Spotfire",
+            "subCategoryId": 32,
+            "subCategoryName": "Spotfire",
+            "appSubCatId": 32,
+            "appSubCatName": "Spotfire",
+            "subcategoryName": "Spotfire"
+        },
+        {
+            "categoryId": 34,
+            "categoryName": "Statistica",
+            "subCategoryId": 34,
+            "subCategoryName": "Statistica",
+            "appSubCatId": 34,
+            "appSubCatName": "Statistica",
+            "subcategoryName": "Statistica"
+        },
+        {
+            "categoryId": 66,
+            "categoryName": "This case is not related to Product",
+            "subCategoryId": 65,
+            "subCategoryName": "This case is not related to Product",
+            "appSubCatId": 65,
+            "appSubCatName": "This case is not related to Product",
+            "subcategoryName": "This case is not related to Product"
+        },
+        {
+            "categoryId": 3,
+            "categoryName": "tibbr",
+            "subCategoryId": 3,
+            "subCategoryName": "tibbr",
+            "appSubCatId": 3,
+            "appSubCatName": "tibbr",
+            "subcategoryName": "tibbr"
+        },
+        {
+            "categoryId": 4,
+            "categoryName": "ActiveSpaces",
+            "subCategoryId": 4,
+            "subCategoryName": "TIBCO ActiveSpaces",
+            "appSubCatId": 4,
+            "appSubCatName": "TIBCO ActiveSpaces",
+            "subcategoryName": "TIBCO ActiveSpaces"
+        },
+        {
+            "categoryId": 6,
+            "categoryName": "Administrator",
+            "subCategoryId": 6,
+            "subCategoryName": "TIBCO Administrator",
+            "appSubCatId": 6,
+            "appSubCatName": "TIBCO Administrator",
+            "subcategoryName": "TIBCO Administrator"
+        },
+        {
+            "categoryId": 7,
+            "categoryName": "AMX BPM",
+            "subCategoryId": 7,
+            "subCategoryName": "TIBCO AMX BPM",
+            "appSubCatId": 7,
+            "appSubCatName": "TIBCO AMX BPM",
+            "subcategoryName": "TIBCO AMX BPM"
+        },
+        {
+            "categoryId": 8,
+            "categoryName": "AMX Policy",
+            "subCategoryId": 8,
+            "subCategoryName": "TIBCO AMX Policy",
+            "appSubCatId": 8,
+            "appSubCatName": "TIBCO AMX Policy",
+            "subcategoryName": "TIBCO AMX Policy"
+        },
+        {
+            "categoryId": 9,
+            "categoryName": "AMX SG",
+            "subCategoryId": 9,
+            "subCategoryName": "TIBCO AMX Service Grid",
+            "appSubCatId": 9,
+            "appSubCatName": "TIBCO AMX Service Grid",
+            "subcategoryName": "TIBCO AMX Service Grid"
+        },
+        {
+            "categoryId": 10,
+            "categoryName": "APIX",
+            "subCategoryId": 10,
+            "subCategoryName": "TIBCO API Exchange",
+            "appSubCatId": 10,
+            "appSubCatName": "TIBCO API Exchange",
+            "subcategoryName": "TIBCO API Exchange"
+        },
+        {
+            "categoryId": 11,
+            "categoryName": "BC",
+            "subCategoryId": 11,
+            "subCategoryName": "TIBCO BusinessConnect",
+            "appSubCatId": 11,
+            "appSubCatName": "TIBCO BusinessConnect",
+            "subcategoryName": "TIBCO BusinessConnect"
+        },
+        {
+            "categoryId": 12,
+            "categoryName": "BE",
+            "subCategoryId": 12,
+            "subCategoryName": "TIBCO BusinessEvents",
+            "appSubCatId": 12,
+            "appSubCatName": "TIBCO BusinessEvents",
+            "subcategoryName": "TIBCO BusinessEvents"
+        },
+        {
+            "categoryId": 13,
+            "categoryName": "BW",
+            "subCategoryId": 13,
+            "subCategoryName": "TIBCO BusinessWorks",
+            "appSubCatId": 13,
+            "appSubCatName": "TIBCO BusinessWorks",
+            "subcategoryName": "TIBCO BusinessWorks"
+        },
+        {
+            "categoryId": 14,
+            "categoryName": "Connectors",
+            "subCategoryId": 14,
+            "subCategoryName": "TIBCO Connectors",
+            "appSubCatId": 14,
+            "appSubCatName": "TIBCO Connectors",
+            "subcategoryName": "TIBCO Connectors"
+        },
+        {
+            "categoryId": 35,
+            "categoryName": "Data Virtualization",
+            "subCategoryId": 35,
+            "subCategoryName": "TIBCO Data Virtualization",
+            "appSubCatId": 35,
+            "appSubCatName": "TIBCO Data Virtualization",
+            "subcategoryName": "TIBCO Data Virtualization"
+        },
+        {
+            "categoryId": 15,
+            "categoryName": "DataSynapse",
+            "subCategoryId": 15,
+            "subCategoryName": "TIBCO DataSynapse",
+            "appSubCatId": 15,
+            "appSubCatName": "TIBCO DataSynapse",
+            "subcategoryName": "TIBCO DataSynapse"
+        },
+        {
+            "categoryId": 16,
+            "categoryName": "Designer/TRA",
+            "subCategoryId": 16,
+            "subCategoryName": "TIBCO Designer/TRA",
+            "appSubCatId": 16,
+            "appSubCatName": "TIBCO Designer/TRA",
+            "subcategoryName": "TIBCO Designer/TRA"
+        },
+        {
+            "categoryId": 37,
+            "categoryName": "EBX",
+            "subCategoryId": 37,
+            "subCategoryName": "TIBCO EBX",
+            "appSubCatId": 37,
+            "appSubCatName": "TIBCO EBX",
+            "subcategoryName": "TIBCO EBX"
+        },
+        {
+            "categoryId": 18,
+            "categoryName": "Foresight",
+            "subCategoryId": 18,
+            "subCategoryName": "TIBCO Foresight",
+            "appSubCatId": 18,
+            "appSubCatName": "TIBCO Foresight",
+            "subcategoryName": "TIBCO Foresight"
+        },
+        {
+            "categoryId": 19,
+            "categoryName": "Fulfillment Orchestration",
+            "subCategoryId": 19,
+            "subCategoryName": "TIBCO Fulfillment Orchestration",
+            "appSubCatId": 19,
+            "appSubCatName": "TIBCO Fulfillment Orchestration",
+            "subcategoryName": "TIBCO Fulfillment Orchestration"
+        },
+        {
+            "categoryId": 20,
+            "categoryName": "Hawk",
+            "subCategoryId": 20,
+            "subCategoryName": "TIBCO Hawk",
+            "appSubCatId": 20,
+            "appSubCatName": "TIBCO Hawk",
+            "subcategoryName": "TIBCO Hawk"
+        },
+        {
+            "categoryId": 5,
+            "categoryName": "ibi",
+            "subCategoryId": 5,
+            "subCategoryName": "TIBCO ibi",
+            "appSubCatId": 5,
+            "appSubCatName": "TIBCO ibi",
+            "subcategoryName": "TIBCO ibi"
+        },
+        {
+            "categoryId": 21,
+            "categoryName": "iProcess",
+            "subCategoryId": 21,
+            "subCategoryName": "TIBCO iProcess",
+            "appSubCatId": 21,
+            "appSubCatName": "TIBCO iProcess",
+            "subcategoryName": "TIBCO iProcess"
+        },
+        {
+            "categoryId": 22,
+            "categoryName": "Jaspersoft",
+            "subCategoryId": 22,
+            "subCategoryName": "TIBCO Jaspersoft",
+            "appSubCatId": 22,
+            "appSubCatName": "TIBCO Jaspersoft",
+            "subcategoryName": "TIBCO Jaspersoft"
+        },
+        {
+            "categoryId": 23,
+            "categoryName": "LogLogic",
+            "subCategoryId": 23,
+            "subCategoryName": "TIBCO LogLogic",
+            "appSubCatId": 23,
+            "appSubCatName": "TIBCO LogLogic",
+            "subcategoryName": "TIBCO LogLogic"
+        },
+        {
+            "categoryId": 24,
+            "categoryName": "Mashery",
+            "subCategoryId": 24,
+            "subCategoryName": "TIBCO Mashery",
+            "appSubCatId": 24,
+            "appSubCatName": "TIBCO Mashery",
+            "subcategoryName": "TIBCO Mashery"
+        },
+        {
+            "categoryId": 25,
+            "categoryName": "MDM",
+            "subCategoryId": 25,
+            "subCategoryName": "TIBCO MDM",
+            "appSubCatId": 25,
+            "appSubCatName": "TIBCO MDM",
+            "subcategoryName": "TIBCO MDM"
+        },
+        {
+            "categoryId": 17,
+            "categoryName": "Messaging",
+            "subCategoryId": 17,
+            "subCategoryName": "TIBCO Messaging",
+            "appSubCatId": 17,
+            "appSubCatName": "TIBCO Messaging",
+            "subcategoryName": "TIBCO Messaging"
+        },
+        {
+            "categoryId": 26,
+            "categoryName": "MFT",
+            "subCategoryId": 26,
+            "subCategoryName": "TIBCO MFT",
+            "appSubCatId": 26,
+            "appSubCatName": "TIBCO MFT",
+            "subcategoryName": "TIBCO MFT"
+        },
+        {
+            "categoryId": 27,
+            "categoryName": "Nimbus",
+            "subCategoryId": 27,
+            "subCategoryName": "TIBCO Nimbus",
+            "appSubCatId": 27,
+            "appSubCatName": "TIBCO Nimbus",
+            "subcategoryName": "TIBCO Nimbus"
+        },
+        {
+            "categoryId": 28,
+            "categoryName": "ObjectStar/Mainframe",
+            "subCategoryId": 28,
+            "subCategoryName": "TIBCO ObjectStar",
+            "appSubCatId": 28,
+            "appSubCatName": "TIBCO ObjectStar",
+            "subcategoryName": "TIBCO ObjectStar"
+        },
+        {
+            "categoryId": 29,
+            "categoryName": "OpenSpirit",
+            "subCategoryId": 29,
+            "subCategoryName": "TIBCO OpenSpirit",
+            "appSubCatId": 29,
+            "appSubCatName": "TIBCO OpenSpirit",
+            "subcategoryName": "TIBCO OpenSpirit"
+        },
+        {
+            "categoryId": 30,
+            "categoryName": "RV",
+            "subCategoryId": 30,
+            "subCategoryName": "TIBCO Rendezvous",
+            "appSubCatId": 30,
+            "appSubCatName": "TIBCO Rendezvous",
+            "subcategoryName": "TIBCO Rendezvous"
+        },
+        {
+            "categoryId": 31,
+            "categoryName": "Reward",
+            "subCategoryId": 31,
+            "subCategoryName": "TIBCO Reward",
+            "appSubCatId": 31,
+            "appSubCatName": "TIBCO Reward",
+            "subcategoryName": "TIBCO Reward"
+        },
+        {
+            "categoryId": 36,
+            "categoryName": "Scribe",
+            "subCategoryId": 36,
+            "subCategoryName": "TIBCO Scribe",
+            "appSubCatId": 36,
+            "appSubCatName": "TIBCO Scribe",
+            "subcategoryName": "TIBCO Scribe"
+        },
+        {
+            "categoryId": 33,
+            "categoryName": "StreamBase",
+            "subCategoryId": 33,
+            "subCategoryName": "TIBCO Streaming",
+            "appSubCatId": 33,
+            "appSubCatName": "TIBCO Streaming",
+            "subcategoryName": "TIBCO Streaming"
+        }
+    ]
+} 

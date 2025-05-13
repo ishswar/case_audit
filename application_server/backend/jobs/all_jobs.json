@@ -14,5 +14,37 @@
     "timestamp": "May 11, 2025 11:28 PM",
     "case_number": "2468513",
     "report_url": "audit_reports/case_2468513_audit.md"
+  },
+  "e4b41914-1035-4323-899c-a28b6731dad5": {
+    "job_id": "e4b41914-1035-4323-899c-a28b6731dad5",
+    "status": "completed",
+    "file_path": "pdf_uploads/e4b41914-1035-4323-899c-a28b6731dad5_case_2497081.pdf",
+    "timestamp": "May 12, 2025 09:33 PM",
+    "case_number": "2497081",
+    "report_url": "audit_reports/case_2497081_audit.md"
+  },
+  "a04ee2b3-a968-41b0-8347-adfb5097b577": {
+    "job_id": "a04ee2b3-a968-41b0-8347-adfb5097b577",
+    "status": "completed",
+    "file_path": "pdf_uploads/a04ee2b3-a968-41b0-8347-adfb5097b577_case_2190214.pdf",
+    "timestamp": "May 12, 2025 10:01 PM",
+    "case_number": "2190214",
+    "report_url": "audit_reports/case_2190214_audit.md"
+  },
+  "3c3b704a-02fb-450c-b2c8-709845365785": {
+    "job_id": "3c3b704a-02fb-450c-b2c8-709845365785",
+    "status": "completed",
+    "file_path": "pdf_uploads/3c3b704a-02fb-450c-b2c8-709845365785_case_2488311.pdf",
+    "timestamp": "May 12, 2025 10:18 PM",
+    "case_number": "2488311",
+    "report_url": "audit_reports/case_2488311_audit.md"
+  },
+  "04c9df11-c532-4f90-b7d4-edbbcfbd98c0": {
+    "job_id": "04c9df11-c532-4f90-b7d4-edbbcfbd98c0",
+    "status": "completed",
+    "file_path": "pdf_uploads/04c9df11-c532-4f90-b7d4-edbbcfbd98c0_case_2494011.pdf",
+    "timestamp": "May 12, 2025 10:18 PM",
+    "case_number": "2494011",
+    "report_url": "audit_reports/case_2494011_audit.md"
   }
 }

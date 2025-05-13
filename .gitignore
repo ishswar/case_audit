@@ -24,3 +24,8 @@ ENV/
 # OS specific
 .DS_Store
 Thumbs.db 
+audit_reports/case_2488311_audit.md
+audit_reports/*.md
+get_cases_pdfs/command.txt
+get_cases_pdfs/tibco_case_manager.log
+application_server/backend/jobs/all_jobs.json
